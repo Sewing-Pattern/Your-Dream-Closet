@@ -89,6 +89,12 @@
       margin-bottom: 10px;
     }
 
+    .mini-image {
+      width: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
     svg text {
       font-size: 14px;
     }
@@ -108,7 +114,7 @@
       <img src="Photo Tie Top.png" alt="Modèle de Tie Top">
     </div>
 
-    <h1>✂️ Tutoriel Couture – Réaliser un Tie Top</h1>
+    <h1><img class="mini-image" src="Photo Tie Top.png" alt="Mini Top" />Tutoriel Couture – Réaliser un Tie Top</h1>
 
     <div class="input-box">
       <label for="tour">Entrez votre tour de poitrine (en cm) :</label>
@@ -117,34 +123,11 @@
     </div>
 
     <h2>🧵 Dimensions à couper :</h2>
-    <ul id="liste-dimensions">
-      <li>📏 Rectangle 1 : …</li>
-      <li>📏 Rectangle 2 : …</li>
-      <li>📏 Rectangle 3 : 2 rectangles de 2 × 20 cm</li>
-      <li>📏 Rectangle 4 : 2 rectangles de 35 × 5 cm</li>
-    </ul>
+    <ul id="liste-dimensions"></ul>
 
     <div>
       <h2>📐 Schéma des rectangles (échelle réduite) :</h2>
-      <svg width="100%" height="280" viewBox="0 0 700 280">
-        <!-- Rectangle 1 (2x) -->
-        <rect x="10" y="10" width="300" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
-        <text x="10" y="50" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — Tour de poitrine × 7 cm</text>
-
-        <!-- Rectangle 2 (1x) -->
-        <rect x="10" y="80" width="540" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
-        <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — 1.8 × tour de poitrine × 30 cm</text>
-
-        <!-- Rectangle 3 (2x) -->
-        <rect x="10" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
-        <rect x="40" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
-        <text x="10" y="225" font-family="Quicksand" fill="#228b62">2 x Rectangle 3 — 2 × 20 cm</text>
-
-        <!-- Rectangle 4 (2x) -->
-        <rect x="10" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
-        <rect x="160" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
-        <text x="10" y="275" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 4 — 35 × 5 cm</text>
-      </svg>
+      <svg id="schema" width="100%" height="280" viewBox="0 0 700 280"></svg>
     </div>
 
     <script>
@@ -152,8 +135,12 @@
         const tour = parseFloat(document.getElementById('tour').value);
         if (isNaN(tour) || tour <= 0) return;
 
-        const rect1 = `2 rectangles de ${tour} cm × 7 cm`;
-        const rect2 = `1 rectangle de ${(tour * 1.8).toFixed(1)} cm × 30 cm`;
+        const rect1Width = tour;
+        const rect2Width = (tour * 1.8).toFixed(1);
+
+        // Affichage texte
+        const rect1 = `2 rectangles de ${rect1Width} cm × 7 cm`;
+        const rect2 = `1 rectangle de ${rect2Width} cm × 30 cm`;
         const rect3 = `2 rectangles de 2 × 20 cm`;
         const rect4 = `2 rectangles de 35 × 5 cm`;
 
@@ -163,9 +150,29 @@
           <li>📏 Rectangle 3 : ${rect3}</li>
           <li>📏 Rectangle 4 : ${rect4}</li>
         `;
+
+        // Mise à jour SVG
+        const scale = 2; // facteur d'échelle pour que les largeurs rentrent dans la vue
+        const schema = document.getElementById("schema");
+        schema.innerHTML = `
+          <rect x="10" y="10" width="${rect1Width / scale}" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
+          <rect x="20 + ${rect1Width / scale}" y="10" width="${rect1Width / scale}" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
+          <text x="10" y="50" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — ${rect1Width} × 7 cm</text>
+
+          <rect x="10" y="80" width="${rect2Width / scale}" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
+          <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — ${rect2Width} × 30 cm</text>
+
+          <rect x="10" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
+          <rect x="40" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
+          <text x="10" y="225" font-family="Quicksand" fill="#228b62">2 x Rectangle 3 — 2 × 20 cm</text>
+
+          <rect x="10" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+          <rect x="160" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+          <text x="10" y="275" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 4 — 35 × 5 cm</text>
+        `;
       }
 
-      // Mise à jour automatique au chargement
+      // Initialisation
       mettreAJourDimensions();
     </script>
 
@@ -173,6 +180,7 @@
 
 </body>
 </html>
+
 
 
 
