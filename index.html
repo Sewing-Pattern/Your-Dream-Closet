@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Your Dream Closet</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -28,6 +28,7 @@
       font-size: 2.8em;
       margin: 0;
       font-weight: 600;
+      color: white;
     }
 
     .content {
@@ -39,111 +40,136 @@
       box-shadow: 0 10px 30px rgba(255, 105, 105, 0.2);
     }
 
-    .pattern {
-      background-color: #ffe8e8;
-      padding: 15px;
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .input-box {
       margin-bottom: 20px;
-      border-radius: 16px;
-      border: 2px dashed #ffc052;
     }
 
-    .pattern h2 {
-      color: #ff374e;
+    label {
+      font-weight: bold;
     }
 
-    .download-button {
-      display: inline-block;
-      background: #ff6166;
+    input[type="number"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 100px;
+      margin-left: 10px;
+    }
+
+    button {
+      background-color: #ff7b54;
       color: white;
       padding: 10px 20px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background 0.3s;
-      margin-top: 10px;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 10px;
     }
 
-    .download-button:hover {
-      background: #fc5552;
+    h2 {
+      color: #ff7b54;
+      font-size: 2em;
+      margin-top: 30px;
     }
 
-    .pattern img {
-      width: auto;
-      height: 280px;
-      display: block;
-      margin-top: 10px;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      background-color: #fff0f7;
+    ul {
+      background-color: #ffe5d9;
+      padding: 20px;
+      border-radius: 10px;
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #ff8c34;
-      color: white;
-      margin-top: 40px;
+    li {
+      margin-bottom: 10px;
+    }
+
+    svg text {
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="A_logo_for_Your_Dream_Closet_features_two_waterc.png" alt="Your Dream Closet Logo">
+    <img src="A_logo_for_Your_Dream_Closet_features_two_waterc.png" alt="Logo">
     <h1>Your Dream Closet</h1>
     <p>Free Sewing Patterns & Style Inspiration</p>
   </header>
 
   <div class="content">
 
-    <!-- Tie Top -->
-    <div class="pattern">
-      <h2>Tie Top – Patron PDF</h2>
-      <p>Un indispensable facile à porter, avec un effet noué qui change tout.</p>
-      <img src="Tie Top.png" alt="Tie Top Image">
-      <br>
-      <a href="PAtron Tie Top (2).pdf" class="download-button" download>
-        Télécharger le patron PDF
-      </a>
+    <div class="image-container">
+      <img src="Photo Tie Top.png" alt="Modèle de Tie Top">
     </div>
 
-    <div class="pattern">
-      <h2>Tie Top – Instructions de Couture</h2>
-      <p>Suivez ce guide pas-à-pas pour réaliser votre top à nœuds.</p>
-      <br>
-      <a href="Instruction Couture Tie Top.pdf" class="download-button" download>
-        Télécharger les instructions PDF
-      </a>
+    <h1>✂️ Tutoriel Couture – Réaliser un Tie Top</h1>
+
+    <div class="input-box">
+      <label for="tour">Entrez votre tour de poitrine (en cm) :</label>
+      <input type="number" id="tour" value="90" />
+      <button onclick="mettreAJourDimensions()">Calculer</button>
     </div>
 
-    <!-- Baby Doll Top -->
-    <div class="pattern">
-      <h2>Baby Doll Top – Patron PDF</h2>
-      <p>Patron pensé pour les débutants : peu de pièces, maximum d’effet.</p>
-      <img src="photo.png" alt="Photo du Baby Doll Top">
-      <br>
-      <a href="Patron Baby doll top.pdf" class="download-button" download>
-        Télécharger le patron PDF
-      </a>
+    <h2>🧵 Dimensions à couper :</h2>
+    <ul id="liste-dimensions">
+      <li>📏 Rectangle 1 : …</li>
+      <li>📏 Rectangle 2 : …</li>
+      <li>📏 Rectangle 3 : 2 rectangles de 2 × 20 cm</li>
+      <li>📏 Rectangle 4 : 2 rectangles de 35 × 5 cm</li>
+    </ul>
+
+    <div>
+      <h2>📐 Schéma des rectangles (échelle réduite) :</h2>
+      <svg width="100%" height="280" viewBox="0 0 700 280">
+        <!-- Rectangle 1 (2x) -->
+        <rect x="10" y="10" width="300" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
+        <text x="10" y="50" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — Tour de poitrine × 7 cm</text>
+
+        <!-- Rectangle 2 (1x) -->
+        <rect x="10" y="80" width="540" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
+        <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — 1.8 × tour de poitrine × 30 cm</text>
+
+        <!-- Rectangle 3 (2x) -->
+        <rect x="10" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
+        <rect x="40" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
+        <text x="10" y="225" font-family="Quicksand" fill="#228b62">2 x Rectangle 3 — 2 × 20 cm</text>
+
+        <!-- Rectangle 4 (2x) -->
+        <rect x="10" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+        <rect x="160" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+        <text x="10" y="275" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 4 — 35 × 5 cm</text>
+      </svg>
     </div>
 
-    <div class="pattern">
-      <h2>Baby Doll Top – Instructions de Couture</h2>
-      <p>Suivez pas à pas les étapes pour confectionner ce top.</p>
-      <br>
-      <a href="Instructions de couture Baby Doll Top.pdf" class="download-button" download>
-        Télécharger les instructions PDF
-      </a>
-    </div>
+    <script>
+      function mettreAJourDimensions() {
+        const tour = parseFloat(document.getElementById('tour').value);
+        if (isNaN(tour) || tour <= 0) return;
 
+        const rect1 = `2 rectangles de ${tour} cm × 7 cm`;
+        const rect2 = `1 rectangle de ${(tour * 1.8).toFixed(1)} cm × 30 cm`;
+        const rect3 = `2 rectangles de 2 × 20 cm`;
+        const rect4 = `2 rectangles de 35 × 5 cm`;
 
+        document.getElementById("liste-dimensions").innerHTML = `
+          <li>📏 Rectangle 1 : ${rect1}</li>
+          <li>📏 Rectangle 2 : ${rect2}</li>
+          <li>📏 Rectangle 3 : ${rect3}</li>
+          <li>📏 Rectangle 4 : ${rect4}</li>
+        `;
+      }
 
+      // Mise à jour automatique au chargement
+      mettreAJourDimensions();
+    </script>
 
   </div>
-
-  <footer>
-    &copy; 2025 Your Dream Closet — Free sewing for creative souls
-  </footer>
 
 </body>
 </html>
