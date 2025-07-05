@@ -161,7 +161,7 @@
 
     <div>
       <h2>📐 Schéma des rectangles (échelle réduite) :</h2>
-      <svg id="schema-baby" width="100%" height="180" viewBox="0 0 700 180"></svg>
+      <svg id="schema-baby" width="100%" height="250" viewBox="0 0 700 250"></svg>
     </div>
 
     <div style="margin-top: 30px; text-align: center;">
@@ -214,25 +214,33 @@
       const scale = 2;
 
       document.getElementById("liste-baby").innerHTML = `
-        <li>📏 Rectangle 1 : 1 rectangle de ${r1} cm × 15 cm</li>
+        <li>📏 Rectangle 1 : 2 rectangles de ${r1} cm × 15 cm</li>
         <li>📏 Rectangle 2 : 1 rectangle de ${r2} cm × 20 cm</li>
+        <li>📏 Rectangle 3 : 2 rectangles de 6 × 35 cm</li>
       `;
 
       document.getElementById("schema-baby").innerHTML = `
         <rect x="10" y="10" width="${r1 / scale}" height="25" fill="#a0c4ff" stroke="#0077ff" stroke-width="2"/>
-        <text x="10" y="50" font-family="Quicksand" fill="#0077ff">1 x Rectangle 1 — ${r1} × 15 cm</text>
+        <rect x="20" y="45" width="${r1 / scale}" height="25" fill="#a0c4ff" stroke="#0077ff" stroke-width="2"/>
+        <text x="10" y="85" font-family="Quicksand" fill="#0077ff">2 x Rectangle 1 — ${r1} × 15 cm</text>
 
-        <rect x="10" y="80" width="${r2 / scale}" height="30" fill="#d0f4de" stroke="#4caf50" stroke-width="2"/>
-        <text x="10" y="125" font-family="Quicksand" fill="#4caf50">1 x Rectangle 2 — ${r2} × 20 cm</text>
+        <rect x="10" y="100" width="${r2 / scale}" height="30" fill="#d0f4de" stroke="#4caf50" stroke-width="2"/>
+        <text x="10" y="145" font-family="Quicksand" fill="#4caf50">1 x Rectangle 2 — ${r2} × 20 cm</text>
+
+        <rect x="10" y="170" width="105" height="12" fill="#ffc6ff" stroke="#ff70a6" stroke-width="2"/>
+        <rect x="130" y="170" width="105" height="12" fill="#ffc6ff" stroke="#ff70a6" stroke-width="2"/>
+        <text x="10" y="205" font-family="Quicksand" fill="#d62273">2 x Rectangle 3 — 6 × 35 cm</text>
       `;
     }
 
+    // Initialiser avec valeurs par défaut
     mettreAJourDimensions();
     mettreAJourBaby();
   </script>
 
 </body>
 </html>
+
 
 
 
