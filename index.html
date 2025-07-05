@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Dream Closet - Tie Top</title>
+  <title>Your Dream Closet</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -19,11 +19,16 @@
       color: white;
     }
 
+    header img {
+      width: 180px;
+      margin-bottom: 10px;
+    }
+
     h1 {
-      font-size: 3.2em;
+      font-size: 2.8em;
       margin: 0;
       font-weight: 600;
-      color: #ff374e;
+      color: white;
     }
 
     .content {
@@ -36,13 +41,10 @@
     }
 
     .image-container img {
-      width: 100%;
-      max-width: 600px;
+      max-width: 100%;
       height: auto;
-      display: block;
-      margin: 30px auto;
-      border-radius: 20px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .input-box {
@@ -87,6 +89,13 @@
       margin-bottom: 10px;
     }
 
+    .mini-image {
+      width: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+
     svg text {
       font-size: 14px;
     }
@@ -95,15 +104,18 @@
 <body>
 
   <header>
-    <h1>Tie Top</h1>
-    <p>Free Sewing Pattern & Style Inspiration</p>
+    <img src="A_logo_for_Your_Dream_Closet_features_two_waterc.png" alt="Logo">
+    <h1>Your Dream Closet</h1>
+    <p>Free Sewing Patterns & Style Inspiration</p>
   </header>
 
   <div class="content">
 
     <div class="image-container">
-      <img src="/mnt/data/Photo%20Tie%20Top.png" alt="Tie Top">
+      <img src="photo-tie-top.png" alt="Modèle de Tie Top">
     </div>
+
+    <h1><img class="mini-image" src="photo-tie-top.png" alt="Mini Top" />Tutoriel Couture – Réaliser un Tie Top</h1>
 
     <div class="input-box">
       <label for="tour">Entrez votre tour de poitrine (en cm) :</label>
@@ -112,18 +124,11 @@
     </div>
 
     <h2>🧵 Dimensions à couper :</h2>
-    <ul id="liste-dimensions">
-      <li>📏 Rectangle 1 : …</li>
-      <li>📏 Rectangle 2 : …</li>
-      <li>📏 Rectangle 3 : 2 rectangles de 2 × 20 cm</li>
-      <li>📏 Rectangle 4 : 2 rectangles de 35 × 5 cm</li>
-    </ul>
+    <ul id="liste-dimensions"></ul>
 
     <div>
       <h2>📐 Schéma des rectangles (échelle réduite) :</h2>
-      <svg id="schema-rectangles" width="100%" height="280" viewBox="0 0 700 280">
-        <!-- Les rectangles seront insérés ici dynamiquement -->
-      </svg>
+      <svg id="schema" width="100%" height="280" viewBox="0 0 700 280"></svg>
     </div>
 
     <script>
@@ -131,40 +136,46 @@
         const tour = parseFloat(document.getElementById('tour').value);
         if (isNaN(tour) || tour <= 0) return;
 
-        const rect1Text = `2 rectangles de ${tour} cm × 7 cm`;
-        const rect2Text = `1 rectangle de ${(tour * 1.8).toFixed(1)} cm × 30 cm`;
+        const rect1Width = tour;
+        const rect2Width = (tour * 1.8).toFixed(1);
+        const scale = 2;
 
+        // Affichage texte
         document.getElementById("liste-dimensions").innerHTML = `
-          <li>📏 Rectangle 1 : ${rect1Text}</li>
-          <li>📏 Rectangle 2 : ${rect2Text}</li>
+          <li>📏 Rectangle 1 : 2 rectangles de ${rect1Width} cm × 7 cm</li>
+          <li>📏 Rectangle 2 : 1 rectangle de ${rect2Width} cm × 30 cm</li>
           <li>📏 Rectangle 3 : 2 rectangles de 2 × 20 cm</li>
           <li>📏 Rectangle 4 : 2 rectangles de 35 × 5 cm</li>
         `;
 
-        // Schéma SVG dynamique
-        const svg = document.getElementById("schema-rectangles");
-        svg.innerHTML = `
-          <rect x="10" y="10" width="${tour * 2}" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
-          <text x="10" y="50" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — ${tour} × 7 cm</text>
+        // SVG mise à jour
+        const schema = document.getElementById("schema");
+        schema.innerHTML = `
+          <!-- Rectangle 1 -->
+          <rect x="10" y="10" width="${rect1Width / scale}" height="25" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
+          <text x="10" y="50" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — ${rect1Width} × 7 cm</text>
 
-          <rect x="10" y="80" width="${tour * 1.8}" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
-          <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — ${(tour * 1.8).toFixed(1)} × 30 cm</text>
+          <!-- Rectangle 2 -->
+          <rect x="10" y="80" width="${rect2Width / scale}" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
+          <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — ${rect2Width} × 30 cm</text>
 
+          <!-- Rectangle 3 -->
           <rect x="10" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
           <rect x="40" y="150" width="20" height="60" fill="#caffbf" stroke="#55cc99" stroke-width="2"/>
           <text x="10" y="225" font-family="Quicksand" fill="#228b62">2 x Rectangle 3 — 2 × 20 cm</text>
 
+          <!-- Rectangle 4 -->
           <rect x="10" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
           <rect x="160" y="240" width="140" height="15" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
           <text x="10" y="275" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 4 — 35 × 5 cm</text>
         `;
       }
 
-      // Mise à jour au chargement
       mettreAJourDimensions();
     </script>
 
   </div>
+
 </body>
 </html>
 
