@@ -25,10 +25,9 @@
     }
 
     h1 {
-      font-size: 2.8em;
+      font-size: 2.5em;
       margin: 0;
       font-weight: 600;
-      color: white;
     }
 
     .content {
@@ -80,7 +79,7 @@
 
     h2 {
       color: #ff7b54;
-      font-size: 2em;
+      font-size: 1.8em;
       margin-top: 30px;
     }
 
@@ -104,6 +103,11 @@
     svg text {
       font-size: 14px;
     }
+
+    .section-divider {
+      margin: 60px 0 40px;
+      border-top: 3px dashed #ffc0cb;
+    }
   </style>
 </head>
 <body>
@@ -116,11 +120,41 @@
 
   <div class="content">
 
+    <!-- Tie Top Section -->
+    <div class="image-container">
+      <img src="tie-top.png" alt="Modèle de Tie Top">
+    </div>
+
+    <h1><img class="mini-image" src="tie-top.png" alt="Mini Tie Top" />Tutoriel Couture – Réaliser un Tie Top</h1>
+
+    <div class="input-box">
+      <label for="tour">Entrez votre tour de poitrine (en cm) :</label>
+      <input type="number" id="tour" value="90" />
+      <button onclick="calculer()">Calculer</button>
+    </div>
+
+    <h2>🧵 Dimensions à couper :</h2>
+    <ul id="dimensions"></ul>
+
+    <div>
+      <h2>📐 Schéma des rectangles (échelle réduite) :</h2>
+      <svg id="schema" width="100%" height="200" viewBox="0 0 700 200"></svg>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center;">
+      <a href="instructions-tietop.pdf" download style="text-decoration: none;">
+        <button>📥 Télécharger les instructions de couture (PDF)</button>
+      </a>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Baby Doll Top Section -->
     <div class="image-container">
       <img src="BBDT.png" alt="Modèle de Baby Doll Top">
     </div>
 
-    <h1><img class="mini-image" src="BBDT.png" alt="Mini Top" />Tutoriel Couture – Réaliser un Baby Doll Top</h1>
+    <h1><img class="mini-image" src="BBDT.png" alt="Mini Baby Doll" />Tutoriel Couture – Réaliser un Baby Doll Top</h1>
 
     <div class="input-box">
       <label for="tour2">Entrez votre tour de poitrine (en cm) :</label>
@@ -145,6 +179,31 @@
   </div>
 
   <script>
+    function calculer() {
+      const tour = parseFloat(document.getElementById('tour').value);
+      if (isNaN(tour) || tour <= 0) return;
+
+      const largeur = (tour / 2).toFixed(1);
+      const hauteur = (tour / 3).toFixed(1);
+      const scale = 2;
+
+      document.getElementById("dimensions").innerHTML = `
+        <li>📏 Rectangle 1 : 2 rectangles de ${largeur} cm × ${hauteur} cm</li>
+        <li>📏 Rectangle 2 : 2 bandes de 8 × 45 cm (bretelles)</li>
+      `;
+
+      const schema = document.getElementById("schema");
+      schema.innerHTML = `
+        <rect x="10" y="10" width="${largeur / scale}" height="${hauteur / scale}" fill="#caffbf" stroke="#57cc99" stroke-width="2"/>
+        <rect x="${20 + largeur / scale}" y="10" width="${largeur / scale}" height="${hauteur / scale}" fill="#caffbf" stroke="#57cc99" stroke-width="2"/>
+        <text x="10" y="${20 + hauteur / scale}" fill="#57cc99">2 x Rectangle 1 — ${largeur} × ${hauteur} cm</text>
+
+        <rect x="10" y="${60 + hauteur / scale}" width="32" height="8" fill="#a0c4ff" stroke="#0077b6" stroke-width="2"/>
+        <rect x="60" y="${60 + hauteur / scale}" width="32" height="8" fill="#a0c4ff" stroke="#0077b6" stroke-width="2"/>
+        <text x="10" y="${85 + hauteur / scale}" fill="#0077b6">2 x Bretelles — 8 × 45 cm</text>
+      `;
+    }
+
     function calculerBabyDoll() {
       const tour = parseFloat(document.getElementById('tour2').value);
       if (isNaN(tour) || tour <= 0) return;
@@ -161,22 +220,21 @@
 
       const schema = document.getElementById("schema-babydoll");
       schema.innerHTML = `
-        <!-- Rectangle 1 -->
         <rect x="10" y="10" width="${rect1Width / scale}" height="30" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
         <rect x="${10 + rect1Width / scale + 10}" y="10" width="${rect1Width / scale}" height="30" fill="#ffb3c6" stroke="#ff4e6a" stroke-width="2"/>
         <text x="10" y="55" font-family="Quicksand" fill="#ff4e6a">2 x Rectangle 1 — ${rect1Width} × 15 cm</text>
 
-        <!-- Rectangle 2 -->
         <rect x="10" y="80" width="${rect2Width / scale}" height="30" fill="#ffd6a5" stroke="#ff9900" stroke-width="2"/>
         <text x="10" y="125" font-family="Quicksand" fill="#ff9900">1 x Rectangle 2 — ${rect2Width} × 20 cm</text>
 
-        <!-- Rectangle 3 -->
-        <rect x="10" y="150" width="70" height="12" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
-        <rect x="90" y="150" width="70" height="12" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
-        <text x="10" y="185" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 3 — 6 × 35 cm</text>
+        <rect x="10" y="160" width="70" height="12" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+        <rect x="90" y="160" width="70" height="12" fill="#bdb2ff" stroke="#7a6fff" stroke-width="2"/>
+        <text x="10" y="195" font-family="Quicksand" fill="#5e4fff">2 x Rectangle 3 — 6 × 35 cm</text>
       `;
     }
 
+    // Auto-calcul par défaut au chargement
+    calculer();
     calculerBabyDoll();
   </script>
 
